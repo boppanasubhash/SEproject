@@ -1,0 +1,175 @@
+<%- include("partials/header1.ejs") -%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title style="margin-top: 10px;">order history</title>
+    <style>
+        body {
+            background-color: #bdb76b; 
+        }
+        .container {
+            max-width: 600px;
+        }
+        .checkout-heading {
+            background-color: black;
+            color: #fff;
+            padding: 15px;
+        }
+        .item-list {
+            margin: 20px 0;
+        }
+        .btn-primary {
+            background-color: #000000; 
+            color: #ffffff; 
+        }
+        .product-card {
+            margin-bottom: 15px;
+        }
+        .product-image {
+            width: 80px; 
+            height: 80px; 
+            margin-right: 10px; 
+        }
+        .total-cost {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-button {
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .quantity-value {
+            margin: 0 10px;
+        }
+        .delete-button {
+          background-color: #0f0c0d; 
+          color: #fff;
+          border: none;
+          padding: 5px 10px;
+          margin-left: 6px;
+          cursor: pointer;
+        }
+        .add-button {
+            background-color: #0a0707; 
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .order-card {
+            margin-bottom: 20px; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <center><img style="width: 120px; height:120px" src="https://icon-library.com/images/order-icon-png/order-icon-png-20.jpg" alt="" class="main1logo"></center>
+    <div class="checkout-heading text-center" style="margin-top: 10px;">
+        <h1><strong>Order History</strong></h1>
+    </div>
+    <div class="item-list" id="orderHistory">
+       
+    </div>
+    <div class="total-cost text-center" id="totalCost"></div>
+    <div class="button-container text-center" style="margin: 5px;">
+        <a href="/backhome" class="btn btn-primary" style="margin-bottom: 5px;"><strong>↩️ Menu</strong></a>
+        
+        
+    </div>
+</div>
+
+<script>
+    
+    const authToken = localStorage.getItem('shopco_token');
+
+    
+    if (authToken) {
+        fetch('https://shoping-app-backend.onrender.com/shoping_app/order-history', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+           
+            const orderHistoryElement = document.getElementById('orderHistory');
+    
+            data.order_history.forEach(orderEntry => {
+    
+                const orderList = orderEntry.order_list;
+                const totalCost = orderEntry.total_cost;
+    
+                const orderCard = document.createElement('div');
+                orderCard.classList.add('card', 'order-card');
+    
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+    
+                orderList.map(item => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('card', 'product-card');
+    
+                    const productName = document.createElement('h5');
+                    productName.classList.add('card-title');
+                    productName.textContent = item.name;
+    
+                    const productImage = document.createElement('img');
+                    productImage.src = item.image;
+                    productImage.alt = item.name;
+                    productImage.classList.add('img-fluid', 'rounded', 'product-image');
+    
+                    const productPrice = document.createElement('p');
+                    productPrice.classList.add('card-text');
+                    productPrice.textContent = `Price: $${item.price.toFixed(2)}`;
+    
+                    const productQuantity = document.createElement('p');
+                    productQuantity.classList.add('card-text');
+                    productQuantity.textContent = `Quantity: ${item.quantity}`;
+    
+                    const productAmount = document.createElement('p');
+                    productAmount.classList.add('card-text');
+                    productAmount.textContent = `Amount: $${item.amount.toFixed(2)}`;
+    
+                    productCard.appendChild(productName);
+                    productCard.appendChild(productImage);
+                    productCard.appendChild(productPrice);
+                    productCard.appendChild(productQuantity);
+                    productCard.appendChild(productAmount);
+    
+                    cardBody.appendChild(productCard);
+                });
+    
+                const totalCostText = document.createElement('p');
+                totalCostText.classList.add('card-text');
+                totalCostText.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
+    
+                cardBody.appendChild(totalCostText);
+                orderCard.appendChild(cardBody);
+    
+                orderHistoryElement.appendChild(orderCard);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching order history data:', error);
+        });
+    } else {
+        console.error('Authentication token not found.');
+        
+    }
+    
+
+</script>
+
+</body>
+</html>

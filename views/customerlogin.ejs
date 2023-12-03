@@ -1,0 +1,89 @@
+<%- include("partials/header1.ejs") -%>
+
+<html>
+    <body>
+        <style>
+            .btn-primary {
+                background-color: #000000; 
+                color: #ffffff;
+            }
+          </style>
+        <section class="sbloginpage">
+            <main class="form-signin w-100 m-auto">
+                <center>
+                    <div style="width: 500px; height:100px ; margin:100px; padding:15px ">
+                        <div >
+                            <img style="width: 100px; height:100px" src="https://pluspng.com/img-png/user-png-icon-download-icons-logos-emojis-users-2240.png" alt="">
+                        </div>
+                        <form class="sbform" method="post" action="https://shoping-app-backend.onrender.com/users/login" onsubmit="submitForm(event)">
+                            <h1 style="font-size: 25px;"><strong>Customer Login</strong></h1>
+                           
+                        
+                            <div class="form-floating">
+                                <div style="width: 300px;">
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                                </div>
+                            </div>
+                            
+                            <div class="form-floating" style="margin-top: 10px;">
+                                <div style="width: 300px;">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                                </div>
+                            </div>
+                        
+                            <div style="margin-top: 10px;">
+                                <div style="width: 200px;">
+                                    <button class="btn btn-primary w-100 py-2" type="submit" id="signbtnsb">Log in</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <center><p style="color: black; display: inline-block;"><strong>Don't have an account?</strong>  <a href="/signup"><p style="color: black;display:inline-block;margin-left: 2px;"> SignUp </p></a></p></center>
+                        </div>
+                    </div>
+                </center>
+             
+               
+                
+            </main>
+        </section>
+        <script>
+            function submitForm(event) {
+                event.preventDefault();
+                const form = event.target;
+                const formData = new FormData(form);
+                const jsonPayload = {};
+                formData.forEach((value, key) => {
+                    jsonPayload[key] = value;
+                });
+        
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonPayload),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.token) {
+                        localStorage.setItem('shopco_token', data.token);
+        
+                        console.log('Authentication successful. Token stored:', data.token);
+
+                        alert('Successfully logged in!');
+                        window.location.href = '/home2';
+                    } else {
+                        console.error('Authentication failed.');
+                        alert('Enter valid username or password.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error occurred. Please try again.');
+                });
+            }
+        </script>
+    </body>
+</html>
+

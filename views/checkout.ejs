@@ -1,0 +1,261 @@
+<%- include("partials/header1.ejs") -%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title style="margin-top: 10px;">Checkout</title>
+    <style>
+        body {
+            background-color: #bdb76b; 
+        }
+        .container {
+            max-width: 600px;
+        }
+        .checkout-heading {
+            background-color: black;
+            color: #fff;
+            padding: 15px;
+        }
+        .item-list {
+            margin: 20px 0;
+        }
+        .btn-primary {
+            background-color: #000000; 
+            color: #ffffff; 
+        }
+        .product-card {
+            margin-bottom: 15px;
+        }
+        .product-image {
+            width: 80px; 
+            height: 80px; 
+            margin-right: 10px;
+        }
+        .total-cost {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-button {
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .quantity-value {
+            margin: 0 10px;
+        }
+        .delete-button {
+          background-color: #100b0b; 
+          color: #fff;
+          border: none;
+          padding: 5px 10px;
+          cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <center><img style="width: 120px; height:120px" src="https://icons.iconarchive.com/icons/icons8/android/512/Shopping-Checkout-icon.png" alt="" class="main1logo"></center>
+    <div class="checkout-heading text-center" style="margin-top: 10px;">
+        <h1><strong>SHOPCO. CART</strong></h1>
+    </div>
+    <div class="item-list" id="cartItemList">
+        
+    </div>
+    <div class="total-cost text-center" id="totalCost"></div>
+    <div class="button-container text-center" style="margin: 5px;">
+        <a href="/backhome" class="btn btn-primary" style="margin-bottom: 5px;"><strong>↩️ Menu</strong></a>
+        <a href="/delivery" class="btn btn-primary ml-2" style="display: none;" id="viewCartButton"><strong>Products Ready For Checkout</strong></a>
+    </div>
+</div>
+
+<script>
+    
+    const authToken = localStorage.getItem('shopco_token');
+
+    if (authToken) {
+        fetch('https://shoping-app-backend.onrender.com/shoping_app/view-cart', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+           
+            const itemListElement = document.getElementById('cartItemList');
+            const totalCostElement = document.getElementById('totalCost');
+            const checkoutButton = document.getElementById('viewCartButton');
+
+            
+            
+            if (data.products.length > 0) {
+                checkoutButton.style.display = 'block';
+                checkoutButton.style.display = 'margin-bottom'; 
+                checkoutButton.style.margin = 'auto';
+            }
+            let totalCost = 0;
+
+            data.products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('card', 'product-card');
+
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                const productName = document.createElement('h5');
+                productName.classList.add('card-title');
+                productName.textContent = product.name;
+
+                const productImage = document.createElement('img');
+                productImage.src = product.image;
+                productImage.alt = product.name;
+                productImage.classList.add('img-fluid', 'rounded', 'product-image');
+
+                const productPrice = document.createElement('p');
+                productPrice.classList.add('card-text');
+                
+                
+                if (product.price !== undefined) {
+                    productPrice.textContent = `Price: $${product.price.toFixed(2)}`;
+                } else {
+                    productPrice.textContent = 'Price: N/A';
+                }
+                
+                const productQuantityContainer = document.createElement('div');
+                productQuantityContainer.classList.add('quantity-container');
+
+                const decreaseButton = document.createElement('button');
+                decreaseButton.classList.add('quantity-button');
+                decreaseButton.textContent = '-';
+                decreaseButton.addEventListener('click', () => decrementQuantity(product.name));
+
+                const quantityValue = document.createElement('span');
+                quantityValue.classList.add('quantity-value');
+                quantityValue.textContent = product.quantity;
+
+                const increaseButton = document.createElement('button');
+                increaseButton.classList.add('quantity-button');
+                increaseButton.textContent = '+';
+                increaseButton.addEventListener('click', () => incrementQuantity(product.name));
+
+                productQuantityContainer.appendChild(decreaseButton);
+                productQuantityContainer.appendChild(quantityValue);
+                productQuantityContainer.appendChild(increaseButton);
+
+                const calculatedTotal = product.price * product.quantity;
+                totalCost += calculatedTotal;
+
+                const totalCostText = document.createElement('p');
+                totalCostText.classList.add('card-text');
+                totalCostText.textContent = `Total Cost: $${calculatedTotal.toFixed(2)}`;
+
+                cardBody.appendChild(productName);
+                cardBody.appendChild(productImage); 
+                cardBody.appendChild(productPrice);
+                cardBody.appendChild(productQuantityContainer);
+                cardBody.appendChild(totalCostText);
+
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-button');
+                deleteButton.textContent = '🗑️';
+                deleteButton.addEventListener('click', () => deleteProduct(product.name));
+
+                cardBody.appendChild(deleteButton);
+
+                productCard.appendChild(cardBody);
+
+                itemListElement.appendChild(productCard);
+            });
+
+            totalCostElement.textContent = `Total Cost of All Items: $${totalCost.toFixed(2)}`;
+        })
+        .catch(error => {
+            console.error('Error fetching cart data:', error);
+        });
+
+        function deleteProduct(productName) {
+          
+          fetch(`https://shoping-app-backend.onrender.com/shoping_app/add-to-cart/remove-product`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({ "name": productName })
+              })
+              .then(response => {
+                  if (response.ok) {
+                     
+                      location.reload();
+                  } else {
+                      console.error('Failed to remove product:', response.status);
+                  }
+              })
+              .catch(error => {
+                  console.error('Error removing product:', error);
+              });
+          }
+
+        function incrementQuantity(productName) {
+          console.log(productName)
+          
+          fetch(`https://shoping-app-backend.onrender.com/shoping_app/add-to-cart`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${authToken}`
+              },
+              body: JSON.stringify({ "name": productName })
+          })
+          .then(response => {
+              if (response.ok) {
+                 
+                  location.reload();
+              } else {
+                  console.error('Failed to update quantity:', response.status);
+              }
+          })
+          .catch(error => {
+              console.error('Error updating quantity:', error);
+          });
+      }
+
+        function decrementQuantity(productName) {
+            
+            fetch(`https://shoping-app-backend.onrender.com/shoping_app/add-to-cart/decrement-product`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({ "name": productName })
+            })
+            .then(response => {
+                if (response.ok) {
+                    
+                    location.reload();
+                } else {
+                    console.error('Failed to update quantity:', response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Error updating quantity:', error);
+            });
+        }
+    } else {
+        console.error('Authentication token not found.');
+        
+    }
+</script>
+
+</body>
+</html>

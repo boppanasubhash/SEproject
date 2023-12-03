@@ -1,0 +1,44 @@
+<%- include("partials/header1.ejs"); -%>
+
+<center>
+  
+    <div class="jumbotron" style="margin: 50px;">
+      <div>
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+        <dotlottie-player src="https://lottie.host/fde22472-b265-4489-a39e-6cf225802dfc/wqrr2Qo7XR.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+
+    </div>
+        <h1 class="display-4"><strong>Thank you for shopping!</strong></h1>
+        <h1 class="display-4">Order will be delivered soon!</h1>
+    
+        <hr class="my-4">
+    </div>
+</center>
+<script>
+    const url = 'https://shoping-app-backend.onrender.com/shoping_app/place-order';
+
+
+const token = localStorage.getItem('shopco_token');  
+
+fetch(url, {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  },
+})
+  .then(response => {
+    if (!response.ok) {
+        alert('Error placing order')
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Fetch error:', error);
+  });
+</script>

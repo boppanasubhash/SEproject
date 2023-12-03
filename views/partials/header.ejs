@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping App</title>
+  
+ 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-color: #bdb76b;
+    }
+  </style>
+  <style>
+    .navbar-expand-lg {
+      background-color: #a9a9a9; 
+    }
+  </style>
+</head>
+<body>
+  <style>
+    .btn-outlines-info {
+        background-color: #100c07; 
+        color: #ffffff;
+    }
+  </style>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/mainhome"><strong>SHOPCo.SHOPPING</strong></a>
+
+
+
+      <form class="form-inline my-2 my-lg-0 ml-auto" id="searchForm">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+        <button class="btn btn-outlines-info rounded-circle" onclick="searchProducts()">
+          🔍
+        </button>
+      </form>
+
+      <div class="ml-10" id="signInContainer">
+        <a href="/custlog">
+        <button class="btn btn-outline-info  ml-5" >
+          
+          <strong>🧑 SIGN IN</strong>
+        </button>
+        </a>
+      </div>
+      <div class="ml-10" id="signOutContainer" style="display: none;">
+        
+        <button class="btn btn-outline-info  mr-auto ml-5" onclick="signOut()">
+        
+        <strong>🧑 SIGN OUT</strong>
+        </button>
+      
+      </div>
+      <a href="/orderhistory">
+        <button class="btn btn-outline-info  ml-3"  onclick="orderhistory()">
+           <strong>📜order history</strong>
+          </button>
+      </a>
+
+      <a href="/viewlist">
+        <button class="btn btn-outline-danger rounded-circle mr-2 ml-2" style="color: rgb(189, 66, 66);" onclick="favorites()">
+        &hearts;
+      </button></a>
+      
+      <a href="/checkout">
+        <button class="btn btn-outlines-info rounded-circle"  onclick="ViewBag()">
+            🛍
+          </button>
+      </a>
+    
+    </div>
+  </nav>
+  
+  <script>
+
+    const tokenKey = 'shopco_token';
+    const hasToken = localStorage.getItem(tokenKey);
+
+    const signInContainer = document.getElementById('signInContainer');
+    const signOutContainer = document.getElementById('signOutContainer');
+
+    if (hasToken) {
+      signInContainer.style.display = 'none';
+      signOutContainer.style.display = 'block';
+    } else {
+      signInContainer.style.display = 'block';
+      signOutContainer.style.display = 'none';
+    }
+
+    function signOut() {
+      const tokenKey = 'shopco_token';
+  
+      localStorage.removeItem(tokenKey);
+  
+      location.reload()
+    }
+  </script>
+ 
+</body>

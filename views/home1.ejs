@@ -1,0 +1,341 @@
+<%- include("partials/header.ejs") -%>
+
+  <div class="container">
+    <h1 class="mt-5 mb-4 text-center">Welcome to <strong>SHOPCo.SHOPPING</strong></h1>
+    <style>
+      .btn-outline-info {
+          background-color: #000000; 
+          color: #ffffff; 
+      }
+    </style>
+
+    <div class="row">
+      <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 610px;">
+        <img src="https://underarmour.scene7.com/is/image/Underarmour/3026534-002_DEFAULT?rp=standard-30pad%7CgridTileDesktop&scl=1&fmt=jpg&qlt=30&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=512&hei=640&size=472%2C600" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title">Mens Project Rock 6 Training Shoes</h5>
+          <p class="card-text">Price: $<span id="price1">160</span></p>
+          <p class="id" id="1"></p>
+          <button class="btn btn-outline-info"  onclick="addToBag('Mens Project Rock 6 Training Shoes', 1)"> 🛍 Add to Bag</button>
+          <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Mens Project Rock 6 Training Shoes', 1)">
+            &hearts;
+          </button>
+        </div>
+      </div>
+
+      <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 610px;">
+        <img src="https://underarmour.scene7.com/is/image/Underarmour/3026634-101_DEFAULT?rp=standard-30pad%7CgridTileDesktop&scl=1&fmt=jpg&qlt=30&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=512&hei=640&size=472%2C600" class="card-img-top" alt="Product 2">
+        <div class="card-body">
+          <h5 class="card-title">Unisex UA Jet 23 Basketball Shoes</h5>
+          <p class="card-text">Price: $<span id="price2">80</span></p>
+          <button class="btn btn-outline-info" onclick="addToBag('Unisex UA Jet 23 Basketball Shoes', 2)"> 🛍 Add to Bag</button>
+          <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Unisex UA Jet 23 Basketball Shoes', 2)">
+            &hearts;
+          </button>
+        </div>
+      </div>
+
+
+      <div class="card col-md-4" style="margin-bottom: 20px; height: 610px;">
+        <img src="https://underarmour.scene7.com/is/image/Underarmour/3027154-001_DEFAULT?rp=standard-30pad%7CgridTileDesktop&scl=1&fmt=jpg&qlt=30&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=512&hei=640&size=472%2C600" class="card-img-top" alt="Product 3">
+        <div class="card-body">
+          <h5 class="card-title">Unisex UA HOVR™ Phantom 3 SE Reflect Running Shoes</h5>
+          <p class="card-text">Price: $<span id="price3">150</span></p>
+          <button class="btn btn-outline-info" onclick="addToBag('Unisex UA HOVR™ Phantom 3 SE Reflect Running Shoes', 3)"> 🛍 Add to Bag</button>
+          <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Unisex UA HOVR™ Phantom 3 SE Reflect Running Shoes', 3)">
+            &hearts;
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  <div class="row">
+    <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 680px;">
+      <img src="https://lp2.hm.com/hmgoepprod?set=source[/9d/62/9d62324ff64207b79964142e9c47a92bb740dfa6.jpg],origin[dam],category[men_hoodiessweatshirts_sweatshirts],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 4">
+      <div class="card-body">
+        <h5 class="card-title">Relaxed Fit Sweatshirt</h5>
+        <p class="card-text">Price: $<span id="price4">36</span></p>
+        <button class="btn btn-outline-info" onclick="addToBag('Relaxed Fit Sweatshirt', 4)"> 🛍 Add to Bag</button>
+        <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Relaxed Fit Sweatshirt', 4)">
+          &hearts;
+        </button>
+      </div>
+    </div>
+  
+    <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 680px;">
+      <img src="https://lp2.hm.com/hmgoepprod?set=source[/e4/5c/e45cf502c83b0a79af07da2c1298076bf2fbeb86.jpg],origin[dam],category[men_hoodiessweatshirts_sweatshirts],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 5">
+      <div class="card-body">
+        <h5 class="card-title">Loose Fit Sweatshirt</h5>
+        <p class="card-text">Price: $<span id="price5">12</span></p>
+        <button class="btn btn-outline-info" onclick="addToBag('Loose Fit Sweatshirt', 5)"> 🛍 Add to Bag</button>
+        <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Loose Fit Sweatshirt', 5)">
+          &hearts;
+        </button>
+      </div>
+    </div>
+  
+    <div class="card col-md-4" style="margin-bottom: 20px; height: 680px;">
+      <img src="https://lp2.hm.com/hmgoepprod?set=source[/32/1f/321f4696152eac3045465914f3141d00b9e9f2a1.jpg],origin[dam],category[men_hoodiessweatshirts_sweatshirts],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 6">
+      <div class="card-body">
+        <h5 class="card-title">Relaxed Fit Printed Sweatshirt</h5>
+        <p class="card-text">Price: $<span id="price6">31</span></p>
+        <button class="btn btn-outline-info" onclick="addToBag('Relaxed Fit Printed Sweatshirt', 6)"> 🛍 Add to Bag</button>
+        <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Relaxed Fit Printed Sweatshirt', 6)">
+          &hearts;
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+<div class="row">
+  <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 680px;">
+    <img src="https://lp2.hm.com/hmgoepprod?set=source[/bd/49/bd499bc75a3e883e2cf5669e277d7abc18e7b83f.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 7">
+    <div class="card-body">
+      <h5 class="card-title">Oversized Fit-look Hoodie</h5>
+      <p class="card-text">Price: $<span id="price7">39</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Oversized Fit-look Hoodie', 7)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Oversized Fit-look Hoodie', 7)">
+        &hearts;
+      </button>
+    </div>
+  </div>
+
+
+  <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 680px;">
+    <img src="https://lp2.hm.com/hmgoepprod?set=source[/e5/79/e579c2599e3da6e0289ef7f7ea17c92b1cf58ecc.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 8">
+    <div class="card-body">
+      <h5 class="card-title">Loose Fit Hoodie</h5>
+      <p class="card-text">Price: $<span id="price8">18</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Loose Fit Hoodie', 8)"> 🛍 Add to Bag</button>
+       <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Loose Fit Hoodie', 8)">
+          &hearts;
+      </button>
+    </div>
+  </div>
+
+
+  <div class="card col-md-4" style="margin-bottom: 20px; height: 680px;">
+    <img src="https://lp2.hm.com/hmgoepprod?set=source[/ba/1e/ba1e01fb07272ed9040aaf362c647bc9120bc879.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 9">
+    <div class="card-body">
+      <h5 class="card-title">Oversized Fit Printed Hoodie</h5>
+      <p class="card-text">Price: $<span id="price9">29</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Oversized Fit Printed Hoodie', 9)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Oversized Fit Printed Hoodie', 9)">
+        &hearts;
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 680px;">
+    <img src="https://lp2.hm.com/hmgoepprod?set=source[/ca/48/ca4886389bc8710a1fd0b4a059f4e0621ae461ef.jpg],origin[dam],category[men_shirts_longsleeved],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 10">
+    <div class="card-body">
+      <h5 class="card-title">Padded Overshirt</h5>
+      <p class="card-text">Price: $<span id="price10">68</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Padded Overshirt', 10)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Padded Overshirt', 10)">
+        &hearts;
+      </button>
+    </div>
+  </div>
+
+
+  <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 680px;">
+    <img src="https://lp2.hm.com/hmgoepprod?set=source[/76/fd/76fd6007922dd20e21b09b650ae3f8d57907d5c2.jpg],origin[dam],category[men_shirts_longsleeved],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 11">
+    <div class="card-body">
+      <h5 class="card-title">Regular Fit Wool-blend Overshirt</h5>
+      <p class="card-text">Price: $<span id="price11">67</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Regular Fit Wool-blend Overshirt', 11)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Regular Fit Wool-blend Overshirt', 11)">
+        &hearts;
+      </button>
+    </div>
+  </div>
+
+  <div class="card col-md-4" style="margin-bottom: 20px; height: 680px;">
+    <img src="https://lp2.hm.com/hmgoepprod?set=source[/7c/dc/7cdca7a9d07a8699902d618480ec372c9f24e843.jpg],origin[dam],category[men_shirts_longsleeved],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" class="card-img-top" alt="Product 12">
+    <div class="card-body">
+      <h5 class="card-title">Regular Fit Flannel Shirt</h5>
+      <p class="card-text">Price: $<span id="price12">98</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Regular Fit Flannel Shirt', 12)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Regular Fit Flannel Shirt', 12)">
+        &hearts;
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+ 
+  <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 530px;">
+    <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/7c006a99-b1a8-445e-a7f4-56d866093fbe/sportswear-club-mens-graphic-shorts-hQgvng.png" class="card-img-top" alt="Product 13">
+    <div class="card-body">
+      <h5 class="card-title">Nike Sportswear Club Mens Graphic Shorts</h5>
+      <p class="card-text">Price: $<span id="price13">50</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Nike Sportswear Club Mens Graphic Shorts', 13)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Nike Sportswear Club Mens Graphic Shorts', 13)">
+        &hearts;
+      </button>
+    </div>
+  </div>
+
+  <div class="card col-md-4 mb-3 mr-0.9" style="margin-bottom: 20px; height: 530px;">
+    <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5c58b2a3-7009-4419-b044-d6254cc02e4b/sportswear-sport-essentials-mens-woven-lined-flow-shorts-5nvp4d.png" class="card-img-top" alt="Product 14">
+    <div class="card-body">
+      <h5 class="card-title">Nike Sportswear Sport Essentials Mens Woven Lined Flow Shorts</h5>
+      <p class="card-text">Price: $<span id="price14">53</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Nike Sportswear Sport Essentials Mens Woven Lined Flow Shorts', 14)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Nike Sportswear Sport Essentials Mens Woven Lined Flow Shorts', 14)">
+         &hearts;
+      </button>
+    </div>
+  </div>
+
+
+  <div class="card col-md-4" style="margin-bottom: 20px; height: 530px;">
+    <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/7a8d5bd9-0de8-4247-9374-aadce84042ea/sportswear-tech-fleece-mens-shorts-jbdtpn.png" class="card-img-top" alt="Product 15">
+    <div class="card-body">
+      <h5 class="card-title">Nike Sportswear Tech Fleece Mens Shorts</h5>
+      <p class="card-text">Price: $<span id="price15">95</span></p>
+      <button class="btn btn-outline-info" onclick="addToBag('Nike Sportswear Tech Fleece Mens Shorts', 15)"> 🛍 Add to Bag</button>
+      <button class="btn btn-outline-danger rounded-circle" style="color: red;" onclick="addToWishlist('Nike Sportswear Tech Fleece Mens Shorts', 15)">
+        &hearts;
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+  
+  </div>
+  
+
+  <script>
+    function updateQuantity(productId, change) {
+      const quantityInput = document.getElementById('quantity' + productId);
+      let quantity = parseInt(quantityInput.value) + change;
+      quantity = quantity < 1 ? 0 : quantity;
+      quantityInput.value = quantity;
+      updatePrice(productId);
+    }
+
+    function updatePrice(productId) {
+      const quantityInput = document.getElementById('quantity' + productId);
+      const priceElement = document.getElementById('price' + productId);
+      const finalPriceElement = document.getElementById('finalPrice' + productId);
+
+      const quantity = parseInt(quantityInput.value);
+      const price = parseFloat(priceElement.innerText);
+      const finalPrice = (quantity * price).toFixed(2);
+
+      finalPriceElement.innerText = finalPrice;
+    }
+
+    function submitOrder(productName) {
+      const quantityInput = document.getElementById('quantity' + productName);
+      const quantity = quantityInput.value;
+      const finalPriceElement = document.getElementById('finalPrice' + productName);
+      const finalPrice = finalPriceElement.innerText;
+
+      alert(`Order placed for ${quantity} ${productName}(s) with a total cost of $${finalPrice}!`);
+    }
+    
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      searchProducts(); 
+  });
+
+    function searchProducts() {
+          const searchInput = document.getElementById('searchInput').value.toLowerCase();
+          const products = document.querySelectorAll('.card');
+          console.log("working 1");
+          console.log(products)
+
+          products.forEach(function(card) {
+            var productName = card.querySelector('.card-title').textContent.toLowerCase();
+    
+            if (productName.includes(searchInput)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+      
+    
+  function addToBag(productName, productId) {
+    const requestData = {
+      name: productName
+    };
+
+    const authToken = localStorage.getItem('shopco_token');
+
+  
+    if (!authToken) {
+        console.error('Authentication token not found.');
+        alert('Please log in')
+        return;
+    }
+
+    fetch('https://shoping-app-backend.onrender.com/shoping_app/add-to-cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify(requestData),
+    })
+    .then(response => {
+        if (response.ok) {
+            window.alert('Product added to the bag successfully.');
+        } else {
+            console.error('Failed to add product to the bag.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+  }
+
+  function addToWishlist(productName, productId) {
+    const requestData = {
+      name: productName
+    };
+
+    const authToken = localStorage.getItem('shopco_token');
+
+    if (!authToken) {
+        console.error('Authentication token not found.');
+        alert('Please log in')
+        return;
+    }
+
+    fetch('https://shoping-app-backend.onrender.com/shoping_app/add-to-wishlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify(requestData),
+    })
+    .then(response => {
+        if (response.ok) {
+            window.alert('Product added to the favorites successfully.');
+        } else {
+            console.error('Failed to add product to the favorites.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+  }
+  
+  </script>
+</body>
+</html>

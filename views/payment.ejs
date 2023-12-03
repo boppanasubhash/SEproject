@@ -1,0 +1,39 @@
+<%- include("partials/header1.ejs") -%>
+
+<body>
+    <center>
+        <div class="paymentdiv">
+
+           
+            
+            <div>
+                <center><img style="width: 200px; height:200px" src="https://cdn4.iconfinder.com/data/icons/rounded-solid-outline-shopping-e-commerce-icons-se/144/Credit_Card_Rounded_Solid-512.png" alt="" class="main1logo"></center>
+                <form action="/paymentsucc" method="post">
+                    <div style="margin-top: 20px;">
+                        <div class="mb-3" style="width: 300px;">
+                            <label for="CardNumber" class="form-label" style="font-weight: 500; font-size: 18px;">Card Number</label>
+                            <input type="text" class="form-control" id="CardNumber" aria-describedby="emailHelp" placeholder="Ex: 43XX XXXX XXXX 8797" required oninput="document.getElementById('paymentButton').disabled = !(this.value.trim() && document.getElementById('Expiry').value.trim() && document.getElementById('CVV').value.trim())">
+                        </div>
+                        <div class="mb-3" style="width: 300px;">
+                            <label for="Expiry" class="form-label" style="font-weight: 500; font-size: 18px;">Expiry Details</label>
+                            <input type="date" class="form-control" id="Expiry" required oninput="document.getElementById('paymentButton').disabled = !(this.value.trim() && document.getElementById('CardNumber').value.trim() && document.getElementById('CVV').value.trim())">
+                        </div>
+                        <div class="mb-3" style="width: 300px;">
+                            <label for="CVV" class="form-label" style="font-weight: 500; font-size: 18px;">CVV</label>
+                            <input type="password" class="form-control" id="CVV" placeholder="XXX" required oninput="document.getElementById('paymentButton').disabled = !(this.value.trim() && document.getElementById('CardNumber').value.trim() && document.getElementById('Expiry').value.trim())">
+                        </div>
+                    </div>
+                    <a href="/paymentsucc">
+                        <button type="submit" class="btn btn-primary ml-2" style="margin-bottom: 5px;" id="paymentButton" disabled>Make Payment</button>
+                    </a>
+                    
+                </form>
+                
+             </div>
+        </div>
+    </center>
+   
+    
+   
+    
+</body>
