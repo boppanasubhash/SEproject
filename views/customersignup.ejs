@@ -4,8 +4,8 @@
     <body>
         <style>
             .btn-primary {
-                background-color: #000000; /* Replace with your preferred color code */
-                color: #ffffff; /* Text color */
+                background-color: #000000; 
+                color: #ffffff; 
             }
           </style>
         <section class="sbSignUp">
@@ -17,37 +17,37 @@
                         </div>
                         <form class="sbform" method="post" action="https://shoping-app-backend.onrender.com/users/register" onsubmit="submitForm(event)">
                             <h1 style="font-size: 25px;"><strong>Customer Sign up</strong></h1>
-                            <!-- Other form elements -->
+                           
                 
-                            <!-- Name field -->
+                         
                             <div class="form-floating">
                                 <div style="width: 300px;">
                                     <input type="text" class="form-control" id="floatingInputName" placeholder="Enter Name" name="name" required oninput="document.getElementById('signbtnsb').disabled = !this.value.trim() || !document.getElementById('floatingInputEmail').value.trim() || !document.getElementById('floatingPassword').value.trim() || !document.getElementById('floatingPasswordConfirm').value.trim()" />
                                 </div>
                             </div>
                 
-                            <!-- Email field -->
+                            
                             <div class="form-floating" style="margin-top: 10px;">
                                 <div style="width: 300px;">
                                     <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com" name="email" required oninput="document.getElementById('signbtnsb').disabled = !this.value.trim() || !document.getElementById('floatingInputName').value.trim() || !document.getElementById('floatingPassword').value.trim() || !document.getElementById('floatingPasswordConfirm').value.trim()" />
                                 </div>
                             </div>
                 
-                            <!-- Password field -->
+                          
                             <div class="form-floating" style="margin-top: 10px;">
                                 <div style="width: 300px;">
                                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required oninput="document.getElementById('signbtnsb').disabled = !this.value.trim() || !document.getElementById('floatingInputName').value.trim() || !document.getElementById('floatingInputEmail').value.trim() || !document.getElementById('floatingPasswordConfirm').value.trim()" />
                                 </div>
                             </div>
                 
-                            <!-- Re-enter Password field -->
+                           
                             <div class="form-floating" style="margin-top: 10px;">
                                 <div style="width: 300px;">
                                     <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Re-Enter Password" name="reenteredPassword" required oninput="document.getElementById('signbtnsb').disabled = !this.value.trim() || !document.getElementById('floatingInputName').value.trim() || !document.getElementById('floatingInputEmail').value.trim() || !document.getElementById('floatingPassword').value.trim()" />
                                 </div>
                             </div>
                 
-                            <!-- Submit button -->
+                      
                             <div style="margin-top: 10px;">
                                 <div style="width: 200px;">
                                     <button class="btn btn-primary w-100 py-2" type="submit" id="signbtnsb" disabled>Sign Up</button>
@@ -64,19 +64,19 @@
         </section>
         <script>
             function submitForm(event) {
-                event.preventDefault(); // Prevent the default form submission
+                event.preventDefault(); 
         
-                // Get form data
+             
                 const form = event.target;
                 const formData = new FormData(form);
         
-                // Convert form data to JSON
+                
                 const jsonPayload = {};
                 formData.forEach((value, key) => {
                     jsonPayload[key] = value;
                 });
         
-                // Perform the POST request
+            
                 fetch(form.action, {
                     method: 'POST',
                     headers: {
@@ -86,16 +86,16 @@
                 })
                 .then(response => {
                     if (response.status === 201) {
-                        // Redirect to the login page upon successful registration
+                        
                         alert('succefully registered');
-                        window.location.href = '/loginre'; // Change this URL to match your login page route
+                        window.location.href = '/loginre'; 
                     } else {
-                        // Handle other status codes or errors
+                       
                         console.error('Registration failed.');
                     }
                 })
                 .catch(error => {
-                    // Handle errors
+                   
                     console.error('Error:', error);
                 });
             }
